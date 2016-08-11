@@ -27,17 +27,62 @@ def invert_dict_old(d):
     return inverse
 
 
-def invert_dict_new(d):
-    pass
+def invert_dict_new(d):    
+    d_inv = dict()
+    for key, value in d.items():
+        d_inv[value] = d_inv.get(value, []) + [key]
+
+    return d_inv
 
 
 def print_hist_newest(d):
-    pass
+    key_list = list(d.keys())
+    key_list.sort()
+
+    max_key = max(key_list)
+    max_key = max_key + 1
+
+    for keys in range(0, max_key):
+        print("{}: ".format(keys), end='')
+        print(d.get(keys, ''))
 
 ###############################################################################
 # INSERT COMPLETED CODE FROM HW08_ch11_ex02a BELOW: ###########################
 ###############################################################################
 
+pledge_histogram = {}
+
+
+def histogram_old(s):
+    d = dict()
+    for c in s:
+        if c not in d:
+            d[c] = 1
+        else:
+            d[c] += 1
+    return d
+
+
+def histogram_new(s):
+    for items in s:
+        pledge_histogram[items.strip()] = pledge_histogram.get(items.strip(), 0) + 1
+
+    return pledge_histogram
+
+
+def get_pledge_list():
+    """ Opens pledge.txt and converts to a list, each item is a word in
+    the order it appears in the original file. returns the list.
+    """
+    # Your code here.
+    pledge_list = []
+
+    fileObject = open("pledge.txt", "r")
+    for items in fileObject:
+        for words in items.split():
+            pledge_list.append(words.strip())
+
+    return pledge_list
 
 ###############################################################################
 # INSERT COMPLETED CODE FROM HW08_ch11_ex02a BELOW: ###########################

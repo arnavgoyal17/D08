@@ -13,28 +13,68 @@
 
 # Body
 def reverse_lookup_old(d, v):
-    for k in d:
-        if d[k] == v:
-            return k
-    raise ValueError
+	for k in d:
+		if d[k] == v:
+			return k
+	raise ValueError
 
 
 def reverse_lookup_new(d, v):
-    pass
+	list_v = []
+	for key, value in d.items():
+		if(value == v):
+			list_v.append(key)
+
+	return list_v
 
 
 ###############################################################################
 # INSERT COMPLETED CODE FROM HW08_ch11_ex02a BELOW: ###########################
 ###############################################################################
 
+pledge_histogram = {}
+
+
+def histogram_old(s):
+    d = dict()
+    for c in s:
+        if c not in d:
+            d[c] = 1
+        else:
+            d[c] += 1
+    return d
+
+
+def histogram_new(s):
+    for items in s:
+        pledge_histogram[items.strip()] = pledge_histogram.get(items.strip(), 0) + 1
+
+    return pledge_histogram
+
+
+def get_pledge_list():
+    """ Opens pledge.txt and converts to a list, each item is a word in
+    the order it appears in the original file. returns the list.
+    """
+    # Your code here.
+    pledge_list = []
+
+    fileObject = open("pledge.txt", "r")
+    for items in fileObject:
+        for words in items.split():
+            pledge_list.append(words.strip())
+
+    return pledge_list
 
 ###############################################################################
 # INSERT COMPLETED CODE FROM HW08_ch11_ex02a BELOW: ###########################
 ###############################################################################
 def main():   # DO NOT CHANGE BELOW
-    print(reverse_lookup_new(pledge_histogram, "1"))
-    print(reverse_lookup_new(pledge_histogram, "9"))
-    print(reverse_lookup_new(pledge_histogram, "Python"))
+
+	pledge_histogram = histogram_new(get_pledge_list())
+	print(reverse_lookup_new(pledge_histogram, 1))
+	print(reverse_lookup_new(pledge_histogram, 9))
+	print(reverse_lookup_new(pledge_histogram, "Python"))
 
 if __name__ == '__main__':
     main()

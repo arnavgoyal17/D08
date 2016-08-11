@@ -37,7 +37,10 @@ def histogram_old(s):
 
 
 def histogram_new(s):
-    ...
+    for items in s:
+        pledge_histogram[items.strip()] = pledge_histogram.get(items.strip(), 0) + 1
+
+    return pledge_histogram
 
 
 def get_pledge_list():
@@ -45,8 +48,14 @@ def get_pledge_list():
     the order it appears in the original file. returns the list.
     """
     # Your code here.
-    pass
-    # return pledge_list (uncomment this)
+    pledge_list = []
+
+    fileObject = open("pledge.txt", "r")
+    for items in fileObject:
+        for words in items.split():
+            pledge_list.append(words.strip())
+
+    return pledge_list
 
 
 ###############################################################################

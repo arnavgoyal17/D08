@@ -10,7 +10,17 @@
 
 # Body
 def store_to_dict():
-    pass
+    # define a dictionary
+
+	words_dict = {}
+	fileObject = open("words.txt", "r")
+
+	value = 0
+	for names in fileObject:
+		words_dict[names.strip()] = value
+		value += 1
+
+	return words_dict
 
 
 ###############################################################################
