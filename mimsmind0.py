@@ -57,7 +57,9 @@ def StartGuessing(numberDigits, mainNumber, numberTries):
     while True:
         try:
             userInput = int(input("Enter a " + str(numberDigits) + " digit number: "))
-            if(len(str(userInput)) != numberDigits):
+            if(userInput > 0 and (not (len(str(userInput)) == numberDigits))):
+                raise ValueError
+            elif(userInput < 0 and (not (len(str(userInput)) == numberDigits + 1))):
                 raise ValueError
             numberTries += 1
 
@@ -88,7 +90,7 @@ def main():
                 raise ValueError
             else:
                 numberDigits = userLengthInput
-                StartGame(numberDigits, numberTries)
+                StartGame(numberDigits)
             return True
         except ValueError:
             print("Invalid user input: " + str(sys.argv[1]) + ". Please enter a valid positive integer")
